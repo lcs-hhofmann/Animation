@@ -8,8 +8,9 @@ class Sketch : NSObject {
     
     // Position of circle
     var x : Int
-    
-    var  y : Int
+    var speedX : Int
+    var y : Int
+    var speedY : Int
     
     // This function runs once
     override init() {
@@ -20,36 +21,46 @@ class Sketch : NSObject {
         // Set starting position
         x = 250
         y = 250
+        speedX = 1
+        speedY = 2
         
     }
     
     // Runs in a loop, forever, to create the animated effect
     func draw() {
         
+        
         // Clear the background
-        //canvas.fillColor = Color.white
-        //canvas.drawRectangle(bottomLeftX: 0, bottomLeftY: 0, width: canvas.width, height: canvas.height)
+        canvas.fillColor = Color.white
+        canvas.drawRectangle(bottomLeftX: 0, bottomLeftY: 0, width: canvas.width, height: canvas.height)
+        
+        x = x+speedX
+        y = y+speedY
         
         // Change position
-        x += 1
-        y -= 1
+        if x == 500 {
+            speedX = Int(-2.5)
+        }
         
-        // Draw an ellipse in the middle of the canvas
-        canvas.drawShapesWithBorders = false
-        canvas.fillColor = Color.red
-        canvas.drawEllipse(centreX: x, centreY: x, width: 50, height: 50)
+        if x == 0 {
+            speedX = Int(2.5)
+        }
+//
+        if y == 0 {
+            speedY = 2
+        }
         
-        canvas.fillColor = Color.green
-        canvas.drawEllipse(centreX: y, centreY: x, width: 50, height: 50)
-        
-        canvas.fillColor = Color.yellow
-        canvas.drawEllipse(centreX: y, centreY: y, width: 50, height: 50)
-        
-        canvas.fillColor = Color.blue
-        canvas.drawEllipse(centreX: x, centreY: y, width: 50, height: 50)
+        if y == 500 {
+            speedY = -2
+            
+        }
         
     
+        // Draw an ellipse in the middle of the canvas
+        canvas.fillColor = Color.black
+        canvas.drawEllipse(centreX: x, centreY: y, width: 50, height: 50)
         
     }
     
+
 }
